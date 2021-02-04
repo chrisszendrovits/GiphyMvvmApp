@@ -3,6 +3,7 @@ package clandestino.giphymvvmapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import clandestino.giphymvvmapp.ui.random.RandomGifFragment
 import clandestino.giphymvvmapp.ui.trending.TrendingListFragment
 import clandestino.giphymvvmapp.ui.widgets.AppDataBindingComponent
 import io.reactivex.disposables.CompositeDisposable
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.root_frame_layout, TrendingListFragment(), "TrendingListFragment")
+            .add(R.id.root_frame_layout, RandomGifFragment(), "TrendingListFragment")
             .commit()
     }
 }
