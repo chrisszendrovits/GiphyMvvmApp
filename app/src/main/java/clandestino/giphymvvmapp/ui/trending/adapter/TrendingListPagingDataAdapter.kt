@@ -14,11 +14,11 @@ class TrendingListPagingDataAdapter :
     companion object {
         val adapterDiffCallback = object : DiffUtil.ItemCallback<TrendingItemViewModel>() {
             override fun areItemsTheSame(oldItem: TrendingItemViewModel, newItem: TrendingItemViewModel): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.id.equals(newItem.id)
             }
 
             override fun areContentsTheSame(oldItem: TrendingItemViewModel, newItem: TrendingItemViewModel): Boolean {
-                return oldItem.equals(newItem)
+                return oldItem.id.equals(newItem.id)
             }
         }
     }
@@ -37,12 +37,6 @@ class TrendingListPagingDataAdapter :
      * view holder class
      */
     class TrendingItemViewHolder(private val binding: TrendingItemCardViewBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(viewModel: TrendingItemViewModel) {
-            binding.viewModel = viewModel
-            binding.executePendingBindings()
-        }
-
         companion object {
             fun newInstance(parent: ViewGroup): TrendingItemViewHolder {
                 var binding = TrendingItemCardViewBinding.inflate(
@@ -52,6 +46,11 @@ class TrendingListPagingDataAdapter :
                 )
                 return TrendingItemViewHolder(binding);
             }
+        }
+
+        fun bind(viewModel: TrendingItemViewModel) {
+            binding.viewModel = viewModel
+            binding.executePendingBindings()
         }
     }
 }

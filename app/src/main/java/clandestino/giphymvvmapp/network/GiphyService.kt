@@ -38,16 +38,12 @@ class GiphyService: NetworkService() {
     fun trendingGifs(page: Int, pageSize: Int): Single<List<Media>> {
         return giphyApi.trendingGifs(page, pageSize)
             .subscribeOn(Schedulers.io())
-            .map {
-                it.data?.let { list -> list }
-            }
+            .map { it.data ?: emptyList() }
     }
 
     fun randomGif(): Single<Image> {
         return giphyApi.randomGif()
             .subscribeOn(Schedulers.io())
-            .map {
-                it.data?.toGif()?.images?.original
-            }
+            .map { it.data?.toGif()?.images?.original }
     }
 }

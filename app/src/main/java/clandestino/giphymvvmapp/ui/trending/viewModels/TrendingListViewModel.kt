@@ -9,14 +9,12 @@ import com.giphy.sdk.core.models.Media
 class TrendingListViewModel: ViewModel() {
 
     companion object {
-        val pageSize = 50
+        val pageSize = 24
 
-        fun convertFrom(list: List<Media>?) : List<TrendingItemViewModel> {
+        fun convertFrom(list: List<Media>) : List<TrendingItemViewModel> {
             val viewModels = mutableListOf<TrendingItemViewModel>()
-            list?.let {
-                for (m in list) {
-                    viewModels.add(TrendingItemViewModel.convertFrom(m))
-                }
+            for (m in list) {
+                viewModels.add(TrendingItemViewModel.convertFrom(m))
             }
             return viewModels
         }
