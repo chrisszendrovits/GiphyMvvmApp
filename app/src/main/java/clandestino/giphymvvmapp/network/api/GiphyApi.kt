@@ -1,12 +1,11 @@
 package clandestino.giphymvvmapp.network.api
 
-import clandestino.giphymvvmapp.models.GiphyObject
 import clandestino.giphymvvmapp.models.SearchResponse
 import clandestino.giphymvvmapp.ui.trending.viewModels.TrendingListViewModel
-import io.reactivex.Single
 import retrofit2.http.GET
 import com.giphy.sdk.core.network.response.ListMediaResponse
 import com.giphy.sdk.core.network.response.RandomGifResponse
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Query
 
 interface GiphyApi {

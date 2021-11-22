@@ -1,12 +1,15 @@
 package clandestino.giphymvvmapp.ui.trending.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import clandestino.giphymvvmapp.databinding.TrendingItemCardViewBinding
 import clandestino.giphymvvmapp.ui.trending.viewModels.TrendingItemViewModel
 
-class TrendingListPageAdapter: PagedListAdapter<TrendingItemViewModel, RecyclerView.ViewHolder>(adapterDiffCallback) {
+class TrendingListPagingDataAdapter :
+    PagingDataAdapter<TrendingItemViewModel, RecyclerView.ViewHolder>(adapterDiffCallback) {
 
     companion object {
         val adapterDiffCallback = object : DiffUtil.ItemCallback<TrendingItemViewModel>() {
@@ -28,5 +31,27 @@ class TrendingListPageAdapter: PagedListAdapter<TrendingItemViewModel, RecyclerV
         val viewModel = getItem(position) as TrendingItemViewModel
         var viewHolder: TrendingItemViewHolder = holder as TrendingItemViewHolder
         viewHolder.bind(viewModel)
+    }
+
+    /**
+     * view holder class
+     */
+    class TrendingItemViewHolder(private val binding: TrendingItemCardViewBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(viewModel: TrendingItemViewModel) {
+            binding.viewModel = viewModel
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun newInstance(parent: ViewGroup): TrendingItemViewHolder {
+                var binding = TrendingItemCardViewBinding.inflate(
+                    LayoutInflater.from(parent.getContext()),
+                    parent,
+                    false
+                )
+                return TrendingItemViewHolder(binding);
+            }
+        }
     }
 }

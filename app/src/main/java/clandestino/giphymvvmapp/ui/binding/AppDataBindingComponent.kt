@@ -1,4 +1,4 @@
-package clandestino.giphymvvmapp.ui.widgets
+package clandestino.giphymvvmapp.ui.binding
 
 import androidx.databinding.DataBindingComponent
 

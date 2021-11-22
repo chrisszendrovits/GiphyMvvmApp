@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "randomGif")
 data class RandomGifEntity(@ColumnInfo(name = "url") val url: String) {
-    @PrimaryKey(autoGenerate = true) val id: Long = 0
+    @PrimaryKey(autoGenerate = true) var id: Long = 0
 }

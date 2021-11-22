@@ -1,21 +1,18 @@
 package clandestino.giphymvvmapp.ui.trending.viewModels
 
 import androidx.lifecycle.ViewModel
-import com.giphy.sdk.core.models.Media
 import com.giphy.sdk.core.models.Image
+import com.giphy.sdk.core.models.Media
 
-class TrendingItemViewModel(var id: String, var image: Image): ViewModel() {
+class TrendingItemViewModel(var id: String? = null, var image: Image? = null): ViewModel() {
     companion object {
-        fun convertTo(list: List<Media>?) : List<TrendingItemViewModel> {
-            val viewModels = mutableListOf<TrendingItemViewModel>()
-            list?.let {
-                for (m in list) {
-                    m.images.downsizedMedium?.let {
-                        viewModels.add(TrendingItemViewModel(m.id, it))
-                    }
-                }
+        fun convertFrom(media: Media) : TrendingItemViewModel {
+            var viewModel = TrendingItemViewModel()
+            media.images.downsizedMedium?.let {
+                viewModel.id = media.id
+                viewModel.image = it
             }
-            return viewModels
+            return viewModel
         }
     }
 }

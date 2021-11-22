@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import clandestino.giphymvvmapp.data.GiphyDataManager
 import clandestino.giphymvvmapp.data.RandomGifEntity
-import clandestino.giphymvvmapp.network.GiphyService
-import com.giphy.sdk.core.models.Image
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class RandomGifViewModel(dataManager: GiphyDataManager) : ViewModel(), LifecycleObserver {
 

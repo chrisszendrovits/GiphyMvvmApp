@@ -29,7 +29,7 @@ class BooleanTypeAdapter: TypeAdapter<Boolean?>() {
                 null
             }
             BOOLEAN -> reader.nextBoolean()
-            NUMBER -> reader.nextInt() !== 0
+            NUMBER -> reader.nextInt() != 0
             STRING -> java.lang.Boolean.parseBoolean(reader.nextString())
             else -> throw IllegalStateException("Expected BOOLEAN or NUMBER but was $token")
         }

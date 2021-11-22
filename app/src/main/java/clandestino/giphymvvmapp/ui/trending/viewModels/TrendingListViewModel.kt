@@ -1,32 +1,34 @@
 package clandestino.giphymvvmapp.ui.trending.viewModels
 
 import androidx.lifecycle.*
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
-import clandestino.giphymvvmapp.ui.trending.datasource.TrendingListDatasourceFactory
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import clandestino.giphymvvmapp.ui.trending.datasource.TrendingListPagingSourceFactory
+import com.giphy.sdk.core.models.Media
 
-class TrendingListViewModel: ViewModel(), LifecycleObserver {
+class TrendingListViewModel: ViewModel() {
 
     companion object {
         val pageSize = 50
+
+        fun convertFrom(list: List<Media>?) : List<TrendingItemViewModel> {
+            val viewModels = mutableListOf<TrendingItemViewModel>()
+            list?.let {
+                for (m in list) {
+                    viewModels.add(TrendingItemViewModel.convertFrom(m))
+                }
+            }
+            return viewModels
+        }
     }
 
-    private val datasourceFactory = TrendingListDatasourceFactory()
-    var trendingList: LiveData<PagedList<TrendingItemViewModel>>
+    private val pager = TrendingListPagingSourceFactory()
+
+    var trendingList: LiveData<PagingData<TrendingItemViewModel>>
         private set
 
     init {
-        val config = PagedList.Config.Builder()
-            .setPageSize(pageSize)
-            .setInitialLoadSizeHint(pageSize * 2)
-            .setEnablePlaceholders(false)
-            .build()
-
-        trendingList = LivePagedListBuilder<String, TrendingItemViewModel>(datasourceFactory, config).build()
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onDestroy() {
-        datasourceFactory.clear()
+        trendingList = pager.getPagingData().cachedIn(viewModelScope)
     }
 }
+

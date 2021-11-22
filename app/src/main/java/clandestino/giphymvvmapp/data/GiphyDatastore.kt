@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = arrayOf(RandomGifEntity::class), version = 1)
+@Database(entities = arrayOf(RandomGifEntity::class), version = 1, exportSchema = false)
 abstract class GiphyDatastore : RoomDatabase() {
 
     abstract fun randomGifDao(): RandomGifDao
