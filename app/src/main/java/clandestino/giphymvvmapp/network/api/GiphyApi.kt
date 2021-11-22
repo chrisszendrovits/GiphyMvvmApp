@@ -11,7 +11,7 @@ import retrofit2.http.Query
 interface GiphyApi {
     @GET("gifs/trending")
     fun trendingGifs(
-        @Query("offset") page: Int,
+        @Query("offset") offset: Int,
         @Query("limit") pageSize: Int = TrendingListViewModel.pageSize
     ): Single<ListMediaResponse>
 

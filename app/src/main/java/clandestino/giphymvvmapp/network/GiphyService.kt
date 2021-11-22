@@ -35,8 +35,8 @@ class GiphyService: NetworkService() {
         ).create(GiphyApi::class.java)
     }
 
-    fun trendingGifs(page: Int, pageSize: Int): Single<List<Media>> {
-        return giphyApi.trendingGifs(page, pageSize)
+    fun trendingGifs(offset: Int, pageSize: Int): Single<List<Media>> {
+        return giphyApi.trendingGifs(offset, pageSize)
             .subscribeOn(Schedulers.io())
             .map { it.data ?: emptyList() }
     }
